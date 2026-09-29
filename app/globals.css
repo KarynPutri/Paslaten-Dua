@@ -1,0 +1,79 @@
+:root {
+  --biru-latar: #f4f9ff;
+  --biru-muda: #dcedfb;
+  --biru-pastel: #bcdcf5;
+  --biru-aksen: #5aa0d8;
+  --teks: #1e3a5f;
+}
+
+body {
+  background-color: var(--biru-latar);
+  color: var(--teks);
+}
+
+.navbar .nav-link,
+.navbar .navbar-brand,
+.navbar .dropdown-item {
+  color: var(--teks);
+}
+
+.navbar .nav-link:hover,
+.navbar .dropdown-item:hover {
+  color: var(--biru-aksen);
+  background-color: transparent;
+}
+
+.btn-primary {
+  background-color: var(--biru-aksen);
+  border-color: var(--biru-aksen);
+}
+
+.btn-primary:hover {
+  background-color: #4a8fc6;
+  border-color: #4a8fc6;
+}
+
+.text-primary {
+  color: var(--biru-aksen) !important;
+}
+
+.kartu-lembut {
+  background-color: #ffffff;
+  border: 1px solid #d6e9f8;
+  border-radius: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kartu-lembut:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(90, 160, 216, 0.15);
+}
+
+.judul-seksi {
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.judul-seksi::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 3px;
+  margin-top: 8px;
+  border-radius: 2px;
+  background-color: #5aa0d8;
+}
+
+.avatar-kosong {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background-color: #dcedfb;
+  color: #5aa0d8;
+  font-size: 2rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
