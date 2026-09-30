@@ -27,8 +27,8 @@ export default function Galeri() {
               onClick={() => setAktif(k)}
               className="btn btn-sm rounded-pill px-3"
               style={{
-                backgroundColor: aktif === k ? "#5aa0d8" : "#dcedfb",
-                color: aktif === k ? "#ffffff" : "#1e3a5f",
+                backgroundColor: aktif === k ? "var(--merah)" : "var(--pasir)",
+                color: aktif === k ? "#ffffff" : "var(--teks)",
                 border: "none",
               }}
             >
@@ -42,7 +42,7 @@ export default function Galeri() {
             <div className="col-6 col-md-4" key={g.id}>
               <div
                 className="kartu-lembut d-flex align-items-end p-3"
-                style={{ height: "180px", cursor: "pointer", backgroundColor: "#dcedfb" }}
+                style={{ height: "180px", cursor: "pointer", backgroundColor: "var(--pasir)" }}
                 onClick={() => setDipilih(g.id)}
               >
                 <span className="small fw-semibold">{g.judul}</span>
@@ -58,7 +58,7 @@ export default function Galeri() {
           style={{
             position: "fixed",
             inset: 0,
-            backgroundColor: "rgba(30, 58, 95, 0.55)",
+            backgroundColor: "rgba(31, 21, 18, 0.78)",
             zIndex: 2000,
             display: "flex",
             alignItems: "center",
@@ -71,11 +71,11 @@ export default function Galeri() {
             style={{ maxWidth: "700px", width: "100%" }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div style={{ backgroundColor: "#dcedfb", height: "360px", borderRadius: "12px" }} />
+            <div style={{ backgroundColor: "var(--pasir)", height: "360px", borderRadius: "12px" }} />
             <div className="d-flex justify-content-between align-items-center mt-3">
               <div>
                 <div className="fw-bold">{foto.judul}</div>
-                <div className="small" style={{ color: "#4a6785" }}>{foto.kategori}</div>
+                <div className="small" style={{ color: "var(--teks-redup)" }}>{foto.kategori}</div>
               </div>
               <button className="btn btn-primary btn-sm" onClick={() => setDipilih(null)}>
                 Tutup

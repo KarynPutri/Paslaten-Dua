@@ -8,7 +8,7 @@ const PetaLeaflet = dynamic(() => import("./PetaLeaflet"), {
   loading: () => (
     <div
       className="d-flex align-items-center justify-content-center"
-      style={{ height: "100%", minHeight: 320, backgroundColor: "#dcedfb", borderRadius: 16, color: "#4a6785" }}
+      style={{ height: "100%", minHeight: 320, backgroundColor: "var(--pasir)", borderRadius: 16, color: "var(--teks-redup)" }}
     >
       Memuat peta…
     </div>

@@ -1,54 +1,206 @@
+/* =========================================================
+   Tema Budaya Tomohon Timur
+   Warna diambil dari busana Kabasaran (merah, hitam), aksen
+   emas, tanah vulkanik Gunung Mahawu, dan hijau pegunungan.
+   ========================================================= */
 :root {
-  --biru-latar: #f4f9ff;
-  --biru-muda: #dcedfb;
-  --biru-pastel: #bcdcf5;
-  --biru-aksen: #5aa0d8;
-  --teks: #1e3a5f;
+  --merah: #9b1c1c;
+  --merah-tua: #6e1414;
+  --emas: #c8962e;
+  --emas-muda: #ecd29a;
+  --hitam: #1f1512;
+  --krem: #fbf6ee;
+  --pasir: #f3e7d4;
+  --hijau: #2f5d3a;
+  --teks: #2b1d17;
+  --teks-redup: #6f5b4d;
+  --garis: #e7d7bf;
+
+  /* Pita motif geometris (terinspirasi kain tenun Minahasa) */
+  --motif-pita: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='14' viewBox='0 0 32 14'%3E%3Crect width='32' height='14' fill='%236e1414'/%3E%3Cpath d='M0 0h32' stroke='%23c8962e' stroke-width='2'/%3E%3Cpath d='M0 14h32' stroke='%23c8962e' stroke-width='2'/%3E%3Cpath d='M16 2l12 5-12 5-12-5z' fill='none' stroke='%23c8962e' stroke-width='1.2'/%3E%3Cpath d='M16 5l5 2-5 2-5-2z' fill='%23ecd29a'/%3E%3Cpath d='M0 3.5L3 7 0 10.5M32 3.5L29 7l3 3.5' fill='none' stroke='%23c8962e' stroke-width='1.2'/%3E%3C/svg%3E");
+  /* Pola latar halus untuk area gelap */
+  --motif-latar: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23c8962e' stroke-opacity='.18' stroke-width='1.2'%3E%3Cpath d='M28 4l24 24-24 24L4 28z'/%3E%3Cpath d='M28 16l12 12-12 12-12-12z'/%3E%3Cpath d='M0 0l8 8M56 0l-8 8M0 56l8-8M56 56l-8-8'/%3E%3C/g%3E%3Ccircle cx='28' cy='28' r='2.2' fill='%23c8962e' fill-opacity='.35'/%3E%3C/svg%3E");
 }
 
 body {
-  background-color: var(--biru-latar);
+  background-color: var(--krem);
   color: var(--teks);
+  font-family: var(--font-teks), system-ui, sans-serif;
 }
 
-.navbar .nav-link,
-.navbar .navbar-brand,
-.navbar .dropdown-item {
+h1, h2, h3, h4, .h1, .h2, .h3, .h4, .navbar-brand, .font-judul {
+  font-family: var(--font-judul), Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: var(--merah);
+  text-decoration-color: rgba(155, 28, 28, 0.35);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--merah-tua);
+}
+
+::selection {
+  background: var(--emas-muda);
+  color: var(--hitam);
+}
+
+/* ---------- Pita motif ---------- */
+.motif-pita {
+  height: 14px;
+  background-image: var(--motif-pita);
+  background-repeat: repeat-x;
+  background-size: 32px 14px;
+}
+
+.motif-pita-tipis {
+  height: 8px;
+  background-image: var(--motif-pita);
+  background-repeat: repeat-x;
+  background-size: 18px 8px;
+}
+
+/* ---------- Navbar ---------- */
+.navbar-budaya {
+  background-color: var(--krem);
+  box-shadow: 0 2px 12px rgba(43, 29, 23, 0.08);
+}
+
+.navbar-budaya .navbar-brand {
   color: var(--teks);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  line-height: 1.1;
 }
 
-.navbar .nav-link:hover,
-.navbar .dropdown-item:hover {
-  color: var(--biru-aksen);
-  background-color: transparent;
+.navbar-budaya .brand-sub {
+  display: block;
+  font-family: var(--font-teks), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teks-redup);
 }
 
+.navbar-budaya .nav-link,
+.navbar-budaya .dropdown-item {
+  color: var(--teks);
+  font-weight: 500;
+}
+
+.navbar-budaya .nav-link {
+  position: relative;
+}
+
+.navbar-budaya .nav-link:hover,
+.navbar-budaya .nav-link.aktif {
+  color: var(--merah);
+}
+
+@media (min-width: 992px) {
+  .navbar-budaya .nav-link.aktif::after {
+    content: "";
+    position: absolute;
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 0.15rem;
+    height: 2px;
+    background: var(--emas);
+  }
+}
+
+.navbar-budaya .dropdown-menu {
+  border: 1px solid var(--garis);
+  border-top: 3px solid var(--merah);
+  border-radius: 0 0 10px 10px;
+  background: #fff;
+}
+
+.navbar-budaya .dropdown-item:hover {
+  background-color: var(--pasir);
+  color: var(--merah);
+}
+
+/* ---------- Tombol ---------- */
 .btn-primary {
-  background-color: var(--biru-aksen);
-  border-color: var(--biru-aksen);
+  background-color: var(--merah);
+  border-color: var(--merah);
+  font-weight: 600;
 }
 
-.btn-primary:hover {
-  background-color: #4a8fc6;
-  border-color: #4a8fc6;
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: var(--merah-tua) !important;
+  border-color: var(--merah-tua) !important;
+}
+
+.btn-emas {
+  background-color: var(--emas);
+  border-color: var(--emas);
+  color: var(--hitam);
+  font-weight: 600;
+}
+
+.btn-emas:hover {
+  background-color: var(--emas-muda);
+  border-color: var(--emas-muda);
+  color: var(--hitam);
+}
+
+.btn-garis-terang {
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: #fff;
+  font-weight: 600;
+}
+
+.btn-garis-terang:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
 }
 
 .text-primary {
-  color: var(--biru-aksen) !important;
+  color: var(--merah) !important;
 }
 
+/* ---------- Kartu ---------- */
 .kartu-lembut {
   background-color: #ffffff;
-  border: 1px solid #d6e9f8;
-  border-radius: 16px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid var(--garis);
+  border-radius: 14px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .kartu-lembut:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(90, 160, 216, 0.15);
+  border-color: var(--emas-muda);
+  box-shadow: 0 10px 24px rgba(110, 20, 20, 0.12);
 }
 
+.kartu-budaya {
+  position: relative;
+  overflow: hidden;
+  border-top: 4px solid var(--merah);
+}
+
+.kartu-budaya .ikon-budaya {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--pasir);
+  color: var(--merah);
+  margin-bottom: 1rem;
+}
+
+/* ---------- Judul seksi ---------- */
 .judul-seksi {
   font-weight: 700;
   margin-bottom: 1.5rem;
@@ -57,23 +209,166 @@ body {
 .judul-seksi::after {
   content: "";
   display: block;
-  width: 48px;
-  height: 3px;
-  margin-top: 8px;
-  border-radius: 2px;
-  background-color: #5aa0d8;
+  width: 72px;
+  height: 8px;
+  margin-top: 10px;
+  background-image: var(--motif-pita);
+  background-size: 18px 8px;
+  background-repeat: repeat-x;
+  border-radius: 1px;
+}
+
+.text-center .judul-seksi::after,
+.judul-seksi.text-center::after {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.label-kecil {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--emas);
+}
+
+/* ---------- Area gelap bermotif (hero, header) ---------- */
+.latar-budaya {
+  position: relative;
+  color: #fff;
+  background-color: var(--merah-tua);
+  background-image: var(--motif-latar),
+    radial-gradient(ellipse at 20% 0%, rgba(200, 150, 46, 0.25), transparent 55%),
+    linear-gradient(135deg, var(--merah) 0%, var(--merah-tua) 55%, var(--hitam) 100%);
+  background-size: 56px 56px, auto, auto;
+  overflow: hidden;
+}
+
+.latar-budaya .siluet-gunung {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+.hero-budaya {
+  padding: 6rem 0 9rem;
+}
+
+.hero-budaya h1 {
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.hero-budaya .lead {
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 560px;
+}
+
+.salam-minahasa {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-judul), serif;
+  font-style: italic;
+  color: var(--emas-muda);
+  font-size: 1.1rem;
+}
+
+.salam-minahasa::before,
+.salam-minahasa::after {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--emas);
+}
+
+.bunga-hias {
+  position: absolute;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.header-halaman {
+  padding: 3.5rem 0 5rem;
+}
+
+.header-halaman p {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* ---------- Lain-lain ---------- */
+.latar-pasir {
+  background-color: var(--pasir);
 }
 
 .avatar-kosong {
   width: 96px;
   height: 96px;
   border-radius: 50%;
-  background-color: #dcedfb;
-  color: #5aa0d8;
+  background-color: var(--pasir);
+  color: var(--merah);
+  border: 2px solid var(--emas-muda);
+  font-family: var(--font-judul), serif;
   font-size: 2rem;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 1rem;
+}
+
+.foto-kosong {
+  background-color: var(--pasir);
+  background-image: var(--motif-latar);
+  background-size: 40px 40px;
+}
+
+/* ---------- Footer ---------- */
+.footer-budaya {
+  background-color: var(--hitam);
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.footer-budaya h5,
+.footer-budaya h6 {
+  color: #fff;
+}
+
+.footer-budaya a {
+  color: var(--emas-muda);
+  text-decoration: none;
+}
+
+.footer-budaya a:hover {
+  color: #fff;
+}
+
+.footer-budaya hr {
+  border-color: rgba(200, 150, 46, 0.35);
+  opacity: 1;
+}
+
+/* Kontrol peta Leaflet mengikuti tema */
+.leaflet-container {
+  font-family: var(--font-teks), sans-serif;
+}
+
+.leaflet-popup-content-wrapper {
+  border-top: 3px solid var(--merah);
+}
+
+.btn-outline-primary {
+  color: var(--merah);
+  border-color: var(--merah);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--merah);
+  border-color: var(--merah);
+  color: #fff;
 }

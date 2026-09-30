@@ -28,18 +28,18 @@ export default async function Kontak() {
             <div className="kartu-lembut p-4 h-100">
               {kontak.map((k) => (
                 <div className="mb-3" key={k.label}>
-                  <div className="small fw-semibold" style={{ color: "#5aa0d8" }}>{k.label}</div>
+                  <div className="small fw-semibold" style={{ color: "var(--merah)" }}>{k.label}</div>
                   <div>{k.isi || "-"}</div>
                 </div>
               ))}
             </div>
           </div>
           <div className="col-md-7">
-            <div className="bg-white p-2 border h-100" style={{ borderRadius: 18, borderColor: "#d6e9f8" }}>
+            <div className="bg-white p-2 border h-100" style={{ borderRadius: 18, borderColor: "var(--garis)" }}>
               <PetaLokasi tinggi={360} alamat={p?.office_address} />
             </div>
             <div className="text-end mt-2">
-              <Link href="/peta" className="small fw-semibold" style={{ color: "#5aa0d8" }}>
+              <Link href="/peta" className="small fw-semibold" style={{ color: "var(--merah)" }}>
                 Lihat peta lengkap →
               </Link>
             </div>

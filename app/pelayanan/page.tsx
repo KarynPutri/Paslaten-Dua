@@ -14,20 +14,20 @@ export default function Pelayanan() {
             <h2 className="h4 fw-bold mb-3">{l.nama}</h2>
             <div className="row g-4">
               <div className="col-md-5">
-                <h3 className="h6 fw-bold" style={{ color: "#5aa0d8" }}>Persyaratan</h3>
+                <h3 className="h6 fw-bold" style={{ color: "var(--merah)" }}>Persyaratan</h3>
                 <ul className="mb-0">
                   {l.persyaratan.map((p) => <li key={p}>{p}</li>)}
                 </ul>
               </div>
               <div className="col-md-7">
-                <h3 className="h6 fw-bold" style={{ color: "#5aa0d8" }}>Prosedur</h3>
+                <h3 className="h6 fw-bold" style={{ color: "var(--merah)" }}>Prosedur</h3>
                 <ol className="mb-0">
                   {l.prosedur.map((p) => <li key={p}>{p}</li>)}
                 </ol>
               </div>
             </div>
             <hr />
-            <p className="small mb-0" style={{ color: "#4a6785" }}>
+            <p className="small mb-0" style={{ color: "var(--teks-redup)" }}>
               Jam pelayanan: {l.jam}
             </p>
           </div>

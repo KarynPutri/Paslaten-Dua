@@ -27,11 +27,11 @@ export default function Login() {
   return (
     <div
       className="d-flex align-items-center justify-content-center px-3"
-      style={{ minHeight: "100vh", backgroundColor: "#f4f9ff" }}
+      style={{ minHeight: "100vh", backgroundColor: "var(--krem)" }}
     >
       <form onSubmit={masuk} className="kartu-lembut p-4" style={{ width: "100%", maxWidth: 380 }}>
         <h1 className="h4 fw-bold mb-1">Login Admin</h1>
-        <p className="small mb-4" style={{ color: "#4a6785" }}>
+        <p className="small mb-4" style={{ color: "var(--teks-redup)" }}>
           Kelurahan Paslaten Dua
         </p>
 

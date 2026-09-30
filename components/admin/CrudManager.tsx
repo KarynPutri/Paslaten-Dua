@@ -288,7 +288,7 @@ export default function CrudManager({
                           style={{ width: 48, height: 48, objectFit: "cover", borderRadius: 8 }}
                         />
                       ) : (
-                        <div style={{ width: 48, height: 48, borderRadius: 8, backgroundColor: "#dcedfb" }} />
+                        <div style={{ width: 48, height: 48, borderRadius: 8, backgroundColor: "var(--pasir)" }} />
                       )}
                     </td>
                   )}

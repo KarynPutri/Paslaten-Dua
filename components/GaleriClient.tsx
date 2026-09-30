@@ -22,8 +22,8 @@ export default function GaleriClient({ items }: { items: Item[] }) {
             onClick={() => setAktif(k)}
             className="btn btn-sm rounded-pill px-3"
             style={{
-              backgroundColor: aktif === k ? "#5aa0d8" : "#dcedfb",
-              color: aktif === k ? "#ffffff" : "#1e3a5f",
+              backgroundColor: aktif === k ? "var(--merah)" : "var(--pasir)",
+              color: aktif === k ? "#ffffff" : "var(--teks)",
               border: "none",
             }}
           >
@@ -59,7 +59,7 @@ export default function GaleriClient({ items }: { items: Item[] }) {
           style={{
             position: "fixed",
             inset: 0,
-            backgroundColor: "rgba(30, 58, 95, 0.55)",
+            backgroundColor: "rgba(31, 21, 18, 0.78)",
             zIndex: 2000,
             display: "flex",
             alignItems: "center",
@@ -80,7 +80,7 @@ export default function GaleriClient({ items }: { items: Item[] }) {
             <div className="d-flex justify-content-between align-items-center mt-3">
               <div>
                 <div className="fw-bold">{foto.title}</div>
-                <div className="small" style={{ color: "#4a6785" }}>{foto.category}</div>
+                <div className="small" style={{ color: "var(--teks-redup)" }}>{foto.category}</div>
               </div>
               <button className="btn btn-primary btn-sm" onClick={() => setDipilih(null)}>
                 Tutup

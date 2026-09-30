@@ -27,7 +27,7 @@ export default async function Agenda() {
             <div className="kartu-lembut p-3 mb-3 d-flex gap-3 align-items-center" key={a.id}>
               <div
                 className="text-center flex-shrink-0"
-                style={{ width: "72px", padding: "10px 0", borderRadius: "12px", backgroundColor: "#dcedfb", color: "#1e3a5f" }}
+                style={{ width: "72px", padding: "10px 0", borderRadius: "12px", backgroundColor: "var(--pasir)", color: "var(--teks)" }}
               >
                 <div className="fs-4 fw-bold lh-1">{t.hari}</div>
                 <div className="small fw-semibold">{t.bulan}</div>
@@ -35,7 +35,7 @@ export default async function Agenda() {
               </div>
               <div>
                 <h2 className="h5 fw-bold mb-1">{a.title}</h2>
-                <p className="small mb-1" style={{ color: "#4a6785" }}>{a.time} · {a.location}</p>
+                <p className="small mb-1" style={{ color: "var(--teks-redup)" }}>{a.time} · {a.location}</p>
                 <p className="mb-0">{a.description}</p>
               </div>
             </div>

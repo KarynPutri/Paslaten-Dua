@@ -16,5 +16,5 @@ export default function Foto({
       />
     );
   }
-  return <div style={{ backgroundColor: "#dcedfb", height: tinggi }} />;
+  return <div className="foto-kosong" style={{ height: tinggi }} aria-label={alt} />;
 }

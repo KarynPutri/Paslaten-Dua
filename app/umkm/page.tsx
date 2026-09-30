@@ -27,12 +27,12 @@ export default async function UMKM() {
                 <div className="p-3 d-flex flex-column flex-grow-1">
                   <h2 className="h5 fw-bold mb-2">{u.name}</h2>
                   <div className="mb-2">
-                    <span className="badge fw-normal" style={{ backgroundColor: "#dcedfb", color: "#1e3a5f" }}>
+                    <span className="badge fw-normal" style={{ backgroundColor: "var(--pasir)", color: "var(--teks)" }}>
                       {u.category}
                     </span>
                   </div>
                   <p className="mb-2">{u.description}</p>
-                  <p className="small mb-3" style={{ color: "#4a6785" }}>
+                  <p className="small mb-3" style={{ color: "var(--teks-redup)" }}>
                     Pemilik: {u.owner} · {u.address}
                   </p>
                   {u.whatsapp && (

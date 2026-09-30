@@ -49,7 +49,7 @@ export default async function Profil() {
             {batas.map((b) => (
               <div className="col-6 col-md-3" key={b.arah}>
                 <div className="kartu-lembut p-3 text-center h-100">
-                  <div className="small" style={{ color: "#5aa0d8", fontWeight: 600 }}>{b.arah}</div>
+                  <div className="small" style={{ color: "var(--merah)", fontWeight: 600 }}>{b.arah}</div>
                   <div>{b.wilayah || "-"}</div>
                 </div>
               </div>
@@ -64,7 +64,7 @@ export default async function Profil() {
               <span
                 key={x}
                 className="badge rounded-pill px-3 py-2 fw-normal fs-6"
-                style={{ backgroundColor: "#dcedfb", color: "#1e3a5f" }}
+                style={{ backgroundColor: "var(--pasir)", color: "var(--teks)" }}
               >
                 {x}
               </span>

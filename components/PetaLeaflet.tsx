@@ -45,12 +45,12 @@ export default function PetaLeaflet({
       <Circle
         center={pusat}
         radius={450}
-        pathOptions={{ color: "#5aa0d8", fillColor: "#5aa0d8", fillOpacity: 0.12, weight: 1 }}
+        pathOptions={{ color: "#9b1c1c", fillColor: "#c8962e", fillOpacity: 0.12, weight: 1 }}
       />
       <CircleMarker
         center={pusat}
         radius={11}
-        pathOptions={{ color: "#ffffff", weight: 3, fillColor: "#1e3a5f", fillOpacity: 1 }}
+        pathOptions={{ color: "#ffffff", weight: 3, fillColor: "#9b1c1c", fillOpacity: 1 }}
       >
         <Popup>
           <strong>{L.nama}</strong>

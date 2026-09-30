@@ -19,7 +19,7 @@ function Kartu({ p }: { p: Pegawai }) {
         <div className="avatar-kosong">{p.name.charAt(0)}</div>
       )}
       <h3 className="h6 fw-bold mb-1">{p.name}</h3>
-      <p className="small mb-0" style={{ color: "#4a6785" }}>{p.position}</p>
+      <p className="small mb-0" style={{ color: "var(--teks-redup)" }}>{p.position}</p>
     </div>
   );
 }

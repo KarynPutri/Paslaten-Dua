@@ -27,10 +27,10 @@ export default async function Berita() {
                 {b.image_url ? (
                   <img src={b.image_url} alt={b.title} style={{ width: "100%", height: "160px", objectFit: "cover" }} />
                 ) : (
-                  <div style={{ backgroundColor: "#dcedfb", height: "160px" }} />
+                  <div style={{ backgroundColor: "var(--pasir)", height: "160px" }} />
                 )}
                 <div className="p-3">
-                  <p className="small mb-1" style={{ color: "#4a6785" }}>{tanggalIndo(b.published_at)}</p>
+                  <p className="small mb-1" style={{ color: "var(--teks-redup)" }}>{tanggalIndo(b.published_at)}</p>
                   <h2 className="h5 fw-bold">{b.title}</h2>
                   <p>{b.summary}</p>
                   <Link href={`/berita/${b.id}`}>Baca Selengkapnya</Link>

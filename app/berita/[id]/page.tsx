@@ -32,7 +32,7 @@ export default async function DetailBerita({
             style={{ width: "100%", maxHeight: "400px", objectFit: "cover", borderRadius: "16px" }}
           />
         ) : (
-          <div className="mb-4" style={{ backgroundColor: "#dcedfb", height: "280px", borderRadius: "16px" }} />
+          <div className="mb-4" style={{ backgroundColor: "var(--pasir)", height: "280px", borderRadius: "16px" }} />
         )}
         <p style={{ lineHeight: 1.8, whiteSpace: "pre-line" }}>{item.content}</p>
         <Link href="/berita">← Kembali ke Berita</Link>

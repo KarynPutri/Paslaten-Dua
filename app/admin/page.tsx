@@ -31,8 +31,8 @@ export default function Dashboard() {
         {tabel.map((t) => (
           <div className="col-6 col-md-4" key={t.table}>
             <Link href={t.href} className="text-decoration-none">
-              <div className="kartu-lembut p-4 text-center h-100" style={{ color: "#1e3a5f" }}>
-                <div className="display-6 fw-bold" style={{ color: "#5aa0d8" }}>
+              <div className="kartu-lembut p-4 text-center h-100" style={{ color: "var(--teks)" }}>
+                <div className="display-6 fw-bold" style={{ color: "var(--merah)" }}>
                   {jumlah[t.table] ?? "–"}
                 </div>
                 <div>{t.label}</div>

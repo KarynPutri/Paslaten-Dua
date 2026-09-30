@@ -34,10 +34,10 @@ export default async function Peta() {
       <div className="container py-5">
         <div className="row g-4">
           <div className="col-lg-8">
-            <div className="bg-white p-2 border" style={{ borderRadius: 18, borderColor: "#d6e9f8" }}>
+            <div className="bg-white p-2 border" style={{ borderRadius: 18, borderColor: "var(--garis)" }}>
               <PetaLokasi tinggi={520} alamat={p?.office_address} />
             </div>
-            <p className="small mt-2 mb-0" style={{ color: "#4a6785" }}>
+            <p className="small mt-2 mb-0" style={{ color: "var(--teks-redup)" }}>
               Gunakan tombol di pojok kanan atas peta untuk beralih ke tampilan satelit.
             </p>
           </div>
@@ -46,7 +46,7 @@ export default async function Peta() {
               <h5 className="fw-bold mb-3">{L.nama}</h5>
               {info.map((k) => (
                 <div className="mb-3" key={k.label}>
-                  <div className="small fw-semibold" style={{ color: "#5aa0d8" }}>{k.label}</div>
+                  <div className="small fw-semibold" style={{ color: "var(--merah)" }}>{k.label}</div>
                   <div>{k.isi || "-"}</div>
                 </div>
               ))}
@@ -59,7 +59,7 @@ export default async function Peta() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn"
-                  style={{ backgroundColor: "#dcedfb", color: "#1e3a5f" }}
+                  style={{ backgroundColor: "var(--pasir)", color: "var(--teks)" }}
                 >
                   Buka di Google Maps
                 </a>

@@ -41,7 +41,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   return (
     <div>
-      <div style={{ backgroundColor: "#dcedfb" }} className="py-3 shadow-sm">
+      <div style={{ backgroundColor: "var(--pasir)" }} className="py-3 shadow-sm">
         <div className="container d-flex justify-content-between align-items-center">
           <span className="fw-bold">Panel Admin · Paslaten Dua</span>
           <div className="d-flex gap-2">
@@ -65,8 +65,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 href={m.href}
                 className="btn btn-sm rounded-pill px-3"
                 style={{
-                  backgroundColor: aktif ? "#5aa0d8" : "#dcedfb",
-                  color: aktif ? "#ffffff" : "#1e3a5f",
+                  backgroundColor: aktif ? "var(--merah)" : "var(--pasir)",
+                  color: aktif ? "#ffffff" : "var(--teks)",
                 }}
               >
                 {m.label}
