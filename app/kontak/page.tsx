@@ -1,4 +1,6 @@
+import Link from "next/link";
 import PageHeader from "../../components/PageHeader";
+import PetaLokasi from "../../components/PetaLokasi";
 import { supabase } from "../../lib/supabase";
 
 export const dynamic = "force-dynamic";
@@ -33,11 +35,13 @@ export default async function Kontak() {
             </div>
           </div>
           <div className="col-md-7">
-            <div
-              className="kartu-lembut d-flex align-items-center justify-content-center h-100"
-              style={{ minHeight: "320px", backgroundColor: "#dcedfb" }}
-            >
-              <span style={{ color: "#4a6785" }}>Peta lokasi (menyusul)</span>
+            <div className="bg-white p-2 border h-100" style={{ borderRadius: 18, borderColor: "#d6e9f8" }}>
+              <PetaLokasi tinggi={360} alamat={p?.office_address} />
+            </div>
+            <div className="text-end mt-2">
+              <Link href="/peta" className="small fw-semibold" style={{ color: "#5aa0d8" }}>
+                Lihat peta lengkap →
+              </Link>
             </div>
           </div>
         </div>

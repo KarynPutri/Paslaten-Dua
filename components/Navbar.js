@@ -73,6 +73,9 @@ export default function Navbar() {
               <Link href="/galeri" className="nav-link" onClick={close}>Galeri</Link>
             </li>
             <li className="nav-item">
+              <Link href="/peta" className="nav-link" onClick={close}>Peta</Link>
+            </li>
+            <li className="nav-item">
               <Link href="/kontak" className="nav-link" onClick={close}>Kontak</Link>
             </li>
           </ul>
