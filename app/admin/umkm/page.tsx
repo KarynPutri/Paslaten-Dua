@@ -24,6 +24,11 @@ export default function UMKMAdmin() {
         { name: "products", label: "Produk" },
         { name: "address", label: "Alamat" },
         {
+          name: "maps_url",
+          label: "Link Google Maps",
+          help: "Buka lokasi di Google Maps, klik Bagikan, lalu Salin link, dan tempel di sini.",
+        },
+        {
           name: "whatsapp",
           label: "Nomor WhatsApp",
           help: "Format 62, tanpa + dan tanpa 0 di depan. Contoh: 6281234567890",

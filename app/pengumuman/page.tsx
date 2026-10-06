@@ -23,9 +23,9 @@ export default async function Pengumuman() {
           <div
             className="kartu-lembut p-4 mb-3"
             key={p.id}
-            style={{ borderLeft: "4px solid var(--merah)" }}
+            style={{ borderLeft: "4px solid #5aa0d8" }}
           >
-            <p className="small mb-1" style={{ color: "var(--teks-redup)" }}>{tanggalIndo(p.published_at)}</p>
+            <p className="small mb-1" style={{ color: "#4a6785" }}>{tanggalIndo(p.published_at)}</p>
             <h2 className="h5 fw-bold">{p.title}</h2>
             <p className="mb-0" style={{ whiteSpace: "pre-line" }}>{p.content}</p>
           </div>

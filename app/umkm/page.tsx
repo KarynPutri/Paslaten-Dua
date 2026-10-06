@@ -27,24 +27,40 @@ export default async function UMKM() {
                 <div className="p-3 d-flex flex-column flex-grow-1">
                   <h2 className="h5 fw-bold mb-2">{u.name}</h2>
                   <div className="mb-2">
-                    <span className="badge fw-normal" style={{ backgroundColor: "var(--pasir)", color: "var(--teks)" }}>
+                    <span
+                      className="badge fw-normal"
+                      style={{ backgroundColor: "#dcedfb", color: "#1e3a5f" }}
+                    >
                       {u.category}
                     </span>
                   </div>
                   <p className="mb-2">{u.description}</p>
-                  <p className="small mb-3" style={{ color: "var(--teks-redup)" }}>
+                  <p className="small mb-3" style={{ color: "#4a6785" }}>
                     Pemilik: {u.owner} · {u.address}
                   </p>
-                  {u.whatsapp && (
-                    <a
-                      href={`https://wa.me/${u.whatsapp}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-primary mt-auto"
-                    >
-                      Hubungi via WhatsApp
-                    </a>
-                  )}
+
+                  <div className="d-flex gap-2 mt-auto">
+                    {u.maps_url?.startsWith("http") && (
+                      <a
+                        href={u.maps_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-outline-primary flex-fill"
+                      >
+                        Lihat Lokasi
+                      </a>
+                    )}
+                    {u.whatsapp && (
+                      <a
+                        href={`https://wa.me/${u.whatsapp}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-primary flex-fill"
+                      >
+                        WhatsApp
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

@@ -372,3 +372,14 @@ a:hover {
   border-color: var(--merah);
   color: #fff;
 }
+
+.btn-outline-primary {
+  color: #5aa0d8;
+  border-color: #5aa0d8;
+}
+
+.btn-outline-primary:hover {
+  background-color: #5aa0d8;
+  border-color: #5aa0d8;
+  color: #ffffff;
+}

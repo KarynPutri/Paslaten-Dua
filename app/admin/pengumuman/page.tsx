@@ -1,23 +1,20 @@
 import CrudManager from "../../../components/admin/CrudManager";
 
-export default function AgendaAdmin() {
+export default function PengumumanAdmin() {
   return (
     <CrudManager
-      table="agendas"
-      title="Kelola Agenda"
-      orderBy="date"
+      table="announcements"
+      title="Kelola Pengumuman"
+      orderBy="published_at"
+      defaults={{ published_at: new Date().toISOString().slice(0, 10) }}
       columns={[
-        { name: "title", label: "Kegiatan" },
-        { name: "date", label: "Tanggal" },
-        { name: "time", label: "Waktu" },
-        { name: "location", label: "Lokasi" },
+        { name: "title", label: "Judul" },
+        { name: "published_at", label: "Tanggal" },
       ]}
       fields={[
-        { name: "title", label: "Nama kegiatan", required: true },
-        { name: "date", label: "Tanggal", type: "date", required: true },
-        { name: "time", label: "Waktu", help: "Contoh: 08.00 WITA" },
-        { name: "location", label: "Lokasi" },
-        { name: "description", label: "Deskripsi", type: "textarea" },
+        { name: "title", label: "Judul", required: true },
+        { name: "published_at", label: "Tanggal", type: "date", required: true },
+        { name: "content", label: "Isi pengumuman", type: "textarea", required: true },
       ]}
     />
   );
