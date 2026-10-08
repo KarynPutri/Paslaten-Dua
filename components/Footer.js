@@ -10,6 +10,7 @@ const tautan = [
   { href: "/umkm", label: "UMKM" },
   { href: "/peta", label: "Peta Lokasi" },
   { href: "/kontak", label: "Kontak" },
+  { href: "/tim-kkt", label: "Tim KKT" },
 ];
 
 export default function Footer() {
@@ -42,7 +43,7 @@ export default function Footer() {
           </div>
           <div className="col-6 col-md-4">
             <h6 className="fw-bold mb-3">Jam Pelayanan</h6>
-            <p className="mb-0">Senin–Jumat, 08.00–17.00 WITA</p>
+            <p className="mb-0">Senin–Jumat, mengikuti jam kerja pemerintah daerah.</p>
           </div>
         </div>
         <hr className="my-4" />

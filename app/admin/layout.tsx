@@ -15,6 +15,7 @@ const menu = [
   { href: "/admin/pemerintahan", label: "Pemerintahan" },
   { href: "/admin/profil", label: "Profil" },
   { href: "/admin/pelayanan", label: "Pelayanan" },
+  { href: "/admin/tim-kkt", label: "Tim KKT" }
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -22,14 +23,34 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const router = useRouter();
   const [siap, setSiap] = useState(false);
   const halamanLogin = pathname === "/admin/login";
+  const BATAS_MENIT = 60;
 
   useEffect(() => {
-    if (halamanLogin) return;
-    supabase.auth.getSession().then(({ data }) => {
-      if (!data.session) router.replace("/admin/login");
-      else setSiap(true);
-    });
-  }, [halamanLogin, router]);
+  if (halamanLogin) return;
+
+  const periksa = async () => {
+    const { data } = await supabase.auth.getSession();
+    let mulai = 0;
+    try {
+      mulai = Number(localStorage.getItem("admin_login_at")) || 0;
+    } catch {}
+    const habis = !mulai || Date.now() - mulai > BATAS_MENIT * 60 * 1000;
+
+    if (!data.session || habis) {
+      await supabase.auth.signOut();
+      try {
+        localStorage.removeItem("admin_login_at");
+      } catch {}
+      router.replace("/admin/login?habis=1");
+      return;
+    }
+    setSiap(true);
+  };
+
+  periksa();
+  const timer = setInterval(periksa, 30000);
+  return () => clearInterval(timer);
+}, [halamanLogin, router]); 
 
   async function keluar() {
     await supabase.auth.signOut();
