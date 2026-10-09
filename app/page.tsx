@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Foto from "../components/Foto";
-import { BungaHias, SiluetGunung } from "../components/Ornamen";
+import { SiluetGunung } from "../components/Ornamen";
+import Peta3DLoader from "../components/Peta3DLoader";
+import InfoPaslaten from "../components/InfoPaslaten";
 import { supabase } from "../lib/supabase";
 import { tanggalIndo } from "../lib/format";
 
@@ -12,47 +14,6 @@ const info = [
   { judul: "Agenda", isi: "Jadwal kegiatan kelurahan.", href: "/agenda" },
 ];
 
-const budaya = [
-  {
-    judul: "Tari Kabasaran",
-    isi: "Tarian keprajuritan Minahasa dengan busana merah menyala, pedang, dan tombak — lambang keberanian para waraney.",
-    ikon: "M12 2l3 7-3 2-3-2zM12 11v11M8 16h8",
-  },
-  {
-    judul: "Musik Kolintang",
-    isi: "Alat musik pukul dari bilah kayu yang mengiringi ibadah, pesta, dan acara adat masyarakat Minahasa.",
-    ikon: "M3 8h18M4 12h16M5 16h14M7 8v8M12 8v8M17 8v8",
-  },
-  {
-    judul: "Mapalus",
-    isi: "Tradisi gotong royong warga — bekerja bersama di kebun, membangun rumah, hingga menolong saat duka.",
-    ikon: "M7 10a3 3 0 100-6 3 3 0 000 6zM17 10a3 3 0 100-6 3 3 0 000 6zM2 20c0-3 2-6 5-6s5 3 5 6M12 20c0-3 2-6 5-6s5 3 5 6",
-  },
-  {
-    judul: "Kota Bunga",
-    isi: "Tomohon dikenal sebagai Kota Bunga. Kebun bunga warga dan Tomohon International Flower Festival menjadi kebanggaan.",
-    ikon: "M12 12a3 3 0 100-6 3 3 0 000 6zM12 12a3 3 0 100 6 3 3 0 000-6zM12 12a3 3 0 10-6 0 3 3 0 006 0zM12 12a3 3 0 106 0 3 3 0 00-6 0zM12 18v4",
-  },
-  {
-    judul: "Gunung Mahawu",
-    isi: "Gunung api di sisi timur Kota Tomohon. Udaranya sejuk dan tanah vulkaniknya menyuburkan kebun sayur warga.",
-    ikon: "M2 20l7-12 4 6 3-4 6 10zM9 8l1.5 2.5",
-  },
-  {
-    judul: "Pakatuan wo Pakalawiren",
-    isi: "Salam dan doa khas Minahasa: semoga panjang umur dan senantiasa sejahtera. Diucapkan dalam berbagai acara adat.",
-    ikon: "M4 5h16v11H8l-4 4zM8 10h8M8 13h5",
-  },
-];
-
-function IkonGaris({ d }: { d: string }) {
-  return (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d={d} />
-    </svg>
-  );
-}
-
 export default async function Home() {
   const [{ data: berita }, { data: umkm }, { data: profil }] = await Promise.all([
     supabase.from("news").select("*").order("published_at", { ascending: false }).limit(3),
@@ -62,11 +23,29 @@ export default async function Home() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="latar-budaya hero-budaya">
-        <BungaHias ukuran={220} className="bunga-hias d-none d-lg-block" style={{ right: "7%", top: "14%", opacity: 0.4 }} />
-        <BungaHias ukuran={90} warna="var(--emas-muda)" className="bunga-hias d-none d-lg-block" style={{ right: "22%", top: "52%", opacity: 0.35 }} />
-        <div className="container position-relative">
+      {/* Hero: peta 3D */}
+      <section
+        className="latar-budaya hero-budaya d-flex align-items-center"
+        style={{
+          position: "relative",
+          overflow: "hidden",
+          minHeight: "min(80vh, 700px)",
+          backgroundColor: "#1f1512",
+        }}
+      >
+        <div style={{ position: "absolute", inset: 0 }}>
+          <Peta3DLoader />
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            pointerEvents: "none",
+            background:
+              "linear-gradient(90deg, rgba(31,21,18,.82) 0%, rgba(31,21,18,.5) 55%, rgba(31,21,18,.2) 100%)",
+          }}
+        />
+        <div className="container position-relative w-100" style={{ pointerEvents: "none" }}>
           <div className="salam-minahasa mb-3">Pakatuan wo Pakalawiren</div>
           <h1 className="mb-3">
             Selamat Datang di
@@ -77,7 +56,7 @@ export default async function Home() {
             Website informasi resmi Kelurahan Paslaten Dua, Kecamatan Tomohon Timur — di kaki
             pegunungan Kota Bunga, tanah Minahasa.
           </p>
-          <div className="d-flex flex-wrap gap-2">
+          <div className="d-flex flex-wrap gap-2" style={{ pointerEvents: "auto" }}>
             <Link href="/profil" className="btn btn-emas px-4 py-2">Lihat Profil</Link>
             <Link href="/peta" className="btn btn-garis-terang px-4 py-2">Peta Lokasi</Link>
           </div>
@@ -90,18 +69,16 @@ export default async function Home() {
         <div className="row align-items-center g-4">
           <div className="col-md-4">
             <div className="kartu-lembut overflow-hidden" style={{ borderBottom: "4px solid var(--emas)" }}>
-              <Foto src={null} alt="Lurah" tinggi={240} />
+              <Foto src={profil?.lurah_photo_url} alt={profil?.lurah_name || "Lurah"} tinggi={240} />
             </div>
           </div>
           <div className="col-md-8">
             <div className="label-kecil mb-1">Sambutan</div>
             <h2 className="h3 judul-seksi">Sambutan Lurah</h2>
-            <p className="mb-1 fw-semibold">Nama Lurah</p>
-            <p>
-              Selamat datang di website resmi Kelurahan Paslaten Dua. Melalui
-              website ini kami berharap informasi kelurahan dapat diakses
-              dengan mudah oleh seluruh masyarakat. Dalam semangat mapalus, mari
-              bersama membangun kelurahan kita.
+            <p className="mb-1 fw-semibold">{profil?.lurah_name || "Nama Lurah"}</p>
+            <p style={{ whiteSpace: "pre-line" }}>
+              {profil?.lurah_message ||
+                "Selamat datang di website resmi Kelurahan Paslaten Dua. Melalui website ini kami berharap informasi kelurahan dapat diakses dengan mudah oleh seluruh masyarakat. Dalam semangat mapalus, mari bersama membangun kelurahan kita."}
             </p>
           </div>
         </div>
@@ -125,32 +102,8 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Budaya */}
-      <section className="latar-pasir py-5">
-        <div className="container py-3">
-          <div className="text-center mb-4">
-            <div className="label-kecil mb-1">Warisan Minahasa</div>
-            <h2 className="h3 judul-seksi">Budaya Tomohon Timur</h2>
-            <p className="mx-auto" style={{ maxWidth: 620, color: "var(--teks-redup)" }}>
-              Paslaten Dua tumbuh bersama adat dan tradisi Minahasa yang terus dijaga
-              warga dari generasi ke generasi.
-            </p>
-          </div>
-          <div className="row g-3">
-            {budaya.map((b) => (
-              <div className="col-md-6 col-lg-4" key={b.judul}>
-                <div className="kartu-lembut kartu-budaya p-4 h-100">
-                  <div className="ikon-budaya">
-                    <IkonGaris d={b.ikon} />
-                  </div>
-                  <h3 className="h5 fw-bold">{b.judul}</h3>
-                  <p className="mb-0" style={{ color: "var(--teks-redup)" }}>{b.isi}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Info Paslaten Dua */}
+      <InfoPaslaten profil={profil} />
 
       {/* Berita */}
       <section className="container py-5">
