@@ -15,7 +15,10 @@ const menu = [
   { href: "/admin/pemerintahan", label: "Pemerintahan" },
   { href: "/admin/profil", label: "Profil" },
   { href: "/admin/pelayanan", label: "Pelayanan" },
-  { href: "/admin/tim-kkt", label: "Tim KKT" }
+  { href: "/admin/tim-kkt", label: "Tim KKT" },
+  { href: "/admin/statistik", label: "Statistik" },
+{ href: "/admin/fasilitas", label: "Fasilitas" },
+{ href: "/admin/data-sekolah", label: "Data Sekolah" }
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

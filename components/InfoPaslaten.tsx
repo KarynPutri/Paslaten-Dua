@@ -78,8 +78,10 @@ export default function InfoPaslaten({ profil }: { profil: Profil }) {
           </p>
         )}
 
-        <div className="text-center mt-3">
-          <Link href="/profil" className="fw-semibold">Lihat profil lengkap →</Link>
+        <div className="text-center mt-3 d-flex flex-wrap gap-3 justify-content-center">
+          <Link href="/statistik" className="fw-semibold">Statistik lengkap →</Link>
+          <Link href="/fasilitas" className="fw-semibold">Fasilitas →</Link>
+          <Link href="/profil" className="fw-semibold">Profil lengkap →</Link>
         </div>
       </div>
     </section>

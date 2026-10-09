@@ -121,6 +121,9 @@ export default function CrudManager({
         payload[f.name] = (payload[f.name] ?? []).map((s: string) => s.trim()).filter(Boolean);
       if (f.type === "date" && !payload[f.name]) payload[f.name] = null;
     }
+    for (const k of Object.keys(payload)) {
+      if (payload[k] === "") payload[k] = null;
+    }
     if (single) payload.updated_at = new Date().toISOString();
 
     const editId = single ? 1 : form.id;

@@ -11,6 +11,8 @@ const tautan = [
   { href: "/peta", label: "Peta Lokasi" },
   { href: "/kontak", label: "Kontak" },
   { href: "/tim-kkt", label: "Tim KKT" },
+  { href: "/statistik", label: "Statistik" },
+{ href: "/fasilitas", label: "Fasilitas" }
 ];
 
 export default function Footer() {
