@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import "leaflet/dist/leaflet.css";
 import "./globals.css";
+import "./interior.css";
 import { Lora, Plus_Jakarta_Sans } from "next/font/google";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -31,8 +31,13 @@ export default function RootLayout({
   return (
     <html lang="id" className={`${fontJudul.variable} ${fontTeks.variable}`}>
       <body className="d-flex flex-column min-vh-100">
+        <a href="#konten-utama" className="skip-link">
+          Lompat ke konten utama
+        </a>
         <Navbar />
-        <main className="flex-grow-1">{children}</main>
+        <main id="konten-utama" className="flex-grow-1" tabIndex={-1}>
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

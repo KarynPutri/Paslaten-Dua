@@ -6,23 +6,62 @@ import InfoPaslaten from "../components/InfoPaslaten";
 import { supabase } from "../lib/supabase";
 import { tanggalIndo } from "../lib/format";
 
-export const dynamic = "force-dynamic";
-
-const info = [
-  { judul: "Pengumuman", isi: "Informasi terbaru untuk warga.", href: "/pengumuman" },
-  { judul: "Pelayanan", isi: "Persyaratan dan prosedur layanan.", href: "/pelayanan" },
-  { judul: "Agenda", isi: "Jadwal kegiatan kelurahan.", href: "/agenda" },
-];
+export const revalidate = 60;
 
 export default async function Home() {
-  const [{ data: berita }, { data: umkm }, { data: profil }] = await Promise.all([
+  // WITA = UTC+8. Agenda hari ini tetap tampil sampai tanggal berganti.
+  // eslint-disable-next-line react-hooks/purity -- Server Component force-dynamic: tanggal dihitung untuk setiap request.
+  const hariIniWita = new Date(Date.now() + 8 * 60 * 60 * 1000).toISOString().slice(0, 10);
+  const [
+    { data: berita, error: errorBerita },
+    { data: umkm, error: errorUmkm },
+    { data: profil },
+    { data: pengumuman, error: errorPengumuman },
+    { data: agenda, error: errorAgenda },
+  ] = await Promise.all([
     supabase.from("news").select("*").order("published_at", { ascending: false }).limit(3),
     supabase.from("umkm").select("*").order("created_at", { ascending: false }).limit(3),
     supabase.from("profiles").select("*").eq("id", 1).maybeSingle(),
+    supabase.from("announcements").select("id, title, published_at")
+      .order("published_at", { ascending: false }).order("id", { ascending: false })
+      .limit(1).maybeSingle(),
+    supabase.from("agendas").select("id, title, date, time, location")
+      .gte("date", hariIniWita).order("date", { ascending: true }).order("id", { ascending: true })
+      .limit(1).maybeSingle(),
   ]);
 
+  const info = [
+    {
+      judul: "Pengumuman Terbaru",
+      isi: errorPengumuman ? "Pengumuman belum dapat dimuat." : pengumuman?.title || "Belum ada pengumuman.",
+      detail: !errorPengumuman && pengumuman?.published_at ? tanggalIndo(pengumuman.published_at) : "",
+      href: "/pengumuman",
+      aksi: "Lihat pengumuman",
+    },
+    {
+      judul: "Pelayanan Warga",
+      isi: "Siapkan keperluan Anda sebelum ke kantor kelurahan.",
+      detail: "Informasi persyaratan dan prosedur layanan.",
+      href: "/pelayanan",
+      aksi: "Lihat persyaratan",
+    },
+    {
+      judul: "Agenda Hari Ini & Mendatang",
+      isi: errorAgenda ? "Agenda belum dapat dimuat." : agenda?.title || "Belum ada agenda mendatang.",
+      detail: !errorAgenda && agenda?.date
+        ? [tanggalIndo(agenda.date), agenda.time, agenda.location].filter(Boolean).join(" · ") : "",
+      href: "/agenda",
+      aksi: "Lihat agenda",
+    },
+  ];
+  const beritaUtama = berita?.[0];
+  const beritaLain = berita?.slice(1) ?? [];
+  const sambutan = (profil?.lurah_message as string | null) ||
+    "Selamat datang di website resmi Kelurahan Paslaten Dua. Melalui website ini kami berharap informasi kelurahan dapat diakses dengan mudah oleh seluruh masyarakat. Dalam semangat mapalus, mari bersama membangun kelurahan kita.";
+  const sambutanPanjang = sambutan.length > 220;
+
   return (
-    <>
+    <div className="beranda-baru">
       {/* Hero: peta 3D */}
       <section
         className="latar-budaya hero-budaya d-flex align-items-center"
@@ -57,103 +96,136 @@ export default async function Home() {
             pegunungan Kota Bunga, tanah Minahasa.
           </p>
           <div className="d-flex flex-wrap gap-2" style={{ pointerEvents: "auto" }}>
-            <Link href="/profil" className="btn btn-emas px-4 py-2">Lihat Profil</Link>
+            <Link href="/pelayanan" className="btn btn-emas px-4 py-2">Layanan Warga</Link>
             <Link href="/peta" className="btn btn-garis-terang px-4 py-2">Peta Lokasi</Link>
           </div>
         </div>
         <SiluetGunung />
       </section>
 
-      {/* Sambutan */}
-      <section className="container py-5">
-        <div className="row align-items-center g-4">
-          <div className="col-md-4">
-            <div className="kartu-lembut overflow-hidden" style={{ borderBottom: "4px solid var(--emas)" }}>
-              <Foto src={profil?.lurah_photo_url} alt={profil?.lurah_name || "Lurah"} tinggi={240} />
-            </div>
-          </div>
-          <div className="col-md-8">
-            <div className="label-kecil mb-1">Sambutan</div>
-            <h2 className="h3 judul-seksi">Sambutan Lurah</h2>
-            <p className="mb-1 fw-semibold">{profil?.lurah_name || "Nama Lurah"}</p>
-            <p style={{ whiteSpace: "pre-line" }}>
-              {profil?.lurah_message ||
-                "Selamat datang di website resmi Kelurahan Paslaten Dua. Melalui website ini kami berharap informasi kelurahan dapat diakses dengan mudah oleh seluruh masyarakat. Dalam semangat mapalus, mari bersama membangun kelurahan kita."}
-            </p>
+      {/* Informasi */}
+      <section className="container seksi-beranda" aria-labelledby="judul-informasi">
+        <div className="kepala-seksi">
+          <div>
+            <div className="label-kecil mb-2">Untuk Warga</div>
+            <h2 id="judul-informasi" className="h3 judul-seksi">Informasi Penting</h2>
+            <p className="pengantar-seksi">Pengumuman, layanan, dan kegiatan dalam satu tempat.</p>
           </div>
         </div>
-      </section>
-
-      {/* Informasi */}
-      <section className="container pb-5">
-        <h2 className="h3 judul-seksi">Informasi Penting</h2>
         <div className="row g-3">
           {info.map((i) => (
-            <div className="col-md-4" key={i.judul}>
-              <Link href={i.href} className="text-decoration-none" style={{ color: "inherit" }}>
-                <div className="kartu-lembut kartu-budaya p-4 h-100">
-                  <h3 className="h5 fw-bold">{i.judul}</h3>
-                  <p className="mb-2" style={{ color: "var(--teks-redup)" }}>{i.isi}</p>
-                  <span className="fw-semibold" style={{ color: "var(--merah)" }}>Lihat selengkapnya →</span>
-                </div>
+            <div className="col-md-4" key={i.href}>
+              <Link href={i.href} className="kartu-lembut kartu-budaya kartu-informasi p-4 h-100 d-flex flex-column text-decoration-none">
+                <h3 className="label-informasi">{i.judul}</h3>
+                <p className="info-judul">{i.isi}</p>
+                {i.detail && <p className="info-detail">{i.detail}</p>}
+                <span className="tautan-aksi mt-auto pt-2">{i.aksi} <span aria-hidden="true">→</span></span>
               </Link>
             </div>
           ))}
         </div>
       </section>
 
+      {/* Berita */}
+      <section className="container seksi-beranda pt-0" aria-labelledby="judul-berita">
+        <div className="kepala-seksi">
+          <div>
+            <div className="label-kecil mb-2">Kabar Kelurahan</div>
+            <h2 id="judul-berita" className="h3 judul-seksi">Berita & Kegiatan Terbaru</h2>
+          </div>
+          <Link href="/berita" className="btn btn-outline-primary">Semua berita <span aria-hidden="true">→</span></Link>
+        </div>
+        {errorBerita ? (
+          <p className="kartu-lembut p-4">Berita belum dapat dimuat. Silakan muat ulang halaman.</p>
+        ) : !beritaUtama ? (
+          <p className="kartu-lembut p-4">Belum ada berita yang diterbitkan.</p>
+        ) : (
+          <div className={`berita-layout ${beritaLain.length === 0 ? "berita-layout-tunggal" : ""}`}>
+            <article className="kartu-lembut berita-utama overflow-hidden">
+              <Foto src={beritaUtama.image_url} alt={beritaUtama.title} tinggi="clamp(220px, 28vw, 360px)" />
+              <div className="isi-berita">
+                <p className="tanggal-berita">{beritaUtama.published_at ? tanggalIndo(beritaUtama.published_at) : ""}</p>
+                <h3 className="h4 fw-bold"><Link href={`/berita/${beritaUtama.id}`}>{beritaUtama.title}</Link></h3>
+                <p className="ringkasan-teks">{beritaUtama.summary}</p>
+                <Link href={`/berita/${beritaUtama.id}`} className="tautan-aksi">Baca selengkapnya <span aria-hidden="true">→</span></Link>
+              </div>
+            </article>
+            {beritaLain.length > 0 && (
+              <div className="berita-samping">
+                {beritaLain.map((b) => (
+                  <article className="kartu-lembut berita-ringkas overflow-hidden" key={b.id}>
+                    <Foto src={b.image_url} alt={b.title} tinggi="100%" />
+                    <div className="isi-berita">
+                      <p className="tanggal-berita">{b.published_at ? tanggalIndo(b.published_at) : ""}</p>
+                      <h3 className="h5 fw-bold"><Link href={`/berita/${b.id}`}>{b.title}</Link></h3>
+                      <p className="ringkasan-teks">{b.summary}</p>
+                      <Link href={`/berita/${b.id}`} className="tautan-aksi">Baca berita <span aria-hidden="true">→</span></Link>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+      </section>
+
       {/* Info Paslaten Dua */}
       <InfoPaslaten profil={profil} />
 
-      {/* Berita */}
-      <section className="container py-5">
-        <div className="d-flex justify-content-between align-items-end mb-2">
-          <h2 className="h3 judul-seksi mb-0">Berita & Kegiatan Terbaru</h2>
-          <Link href="/berita" className="fw-semibold">Lihat Semua</Link>
-        </div>
-        <div className="row g-3 mt-2">
-          {berita?.map((b) => (
-            <div className="col-md-6 col-lg-4" key={b.id}>
-              <div className="kartu-lembut h-100 overflow-hidden">
-                <Foto src={b.image_url} alt={b.title} tinggi={180} />
-                <div className="p-3">
-                  <p className="small mb-1" style={{ color: "var(--emas)" }}>{tanggalIndo(b.published_at)}</p>
-                  <h3 className="h5 fw-bold">{b.title}</h3>
-                  <p style={{ color: "var(--teks-redup)" }}>{b.summary}</p>
-                  <Link href={`/berita/${b.id}`} className="fw-semibold">Baca Selengkapnya →</Link>
-                </div>
-              </div>
-            </div>
-          ))}
+      {/* Sambutan */}
+      <section className="container seksi-beranda" aria-labelledby="judul-sambutan">
+        <div className="sambutan-panel">
+          <div className="sambutan-foto">
+            <Foto src={profil?.lurah_photo_url} alt={profil?.lurah_name ? `Foto ${profil.lurah_name}` : "Foto Lurah"} tinggi={280} posisi="center 20%" contain />
+          </div>
+          <div className="sambutan-teks">
+            <div className="label-kecil mb-2">Dari Kantor Kelurahan</div>
+            <h2 id="judul-sambutan" className="h3 judul-seksi">Sambutan Lurah</h2>
+            {profil?.lurah_name && <p className="fw-semibold mb-2">{profil.lurah_name}</p>}
+            <p className="sambutan-ringkas" style={{ whiteSpace: "pre-line" }}>
+              {sambutanPanjang ? `${sambutan.slice(0, 220).trimEnd()}…` : sambutan}
+            </p>
+            {sambutanPanjang && (
+              <details className="sambutan-lengkap">
+                <summary className="tautan-aksi">Baca sambutan lengkap</summary>
+                <p className="mt-3 mb-0" style={{ whiteSpace: "pre-line" }}>{sambutan}</p>
+              </details>
+            )}
+          </div>
         </div>
       </section>
 
       {/* UMKM */}
-      <section className="container pb-5">
-        <div className="d-flex justify-content-between align-items-end mb-2">
-          <h2 className="h3 judul-seksi mb-0">UMKM Paslaten Dua</h2>
-          <Link href="/umkm" className="fw-semibold">Lihat Semua</Link>
+      <section className="container seksi-beranda pt-0" aria-labelledby="judul-umkm">
+        <div className="kepala-seksi">
+          <div>
+            <div className="label-kecil mb-2">Usaha Warga</div>
+            <h2 id="judul-umkm" className="h3 judul-seksi">UMKM Paslaten Dua</h2>
+            <p className="pengantar-seksi">Kenali produk dan usaha yang tumbuh di lingkungan kita.</p>
+          </div>
+          <Link href="/umkm" className="btn btn-outline-primary">Jelajahi UMKM <span aria-hidden="true">→</span></Link>
         </div>
+        {errorUmkm && <p className="kartu-lembut p-4">Data UMKM belum dapat dimuat. Silakan muat ulang halaman.</p>}
+        {!errorUmkm && !umkm?.length && <p className="kartu-lembut p-4">Belum ada usaha yang ditampilkan.</p>}
         <div className="row g-3 mt-2">
-          {umkm?.map((u) => (
+          {!errorUmkm && umkm?.map((u) => (
             <div className="col-md-6 col-lg-4" key={u.id}>
-              <div className="kartu-lembut h-100 overflow-hidden">
-                <Foto src={u.image_url} alt={u.name} tinggi={180} />
-                <div className="p-3">
+              <article className="kartu-lembut umkm-kartu h-100 overflow-hidden d-flex flex-column">
+                <Foto src={u.image_url} alt={u.name} tinggi="auto" />
+                <div className="p-4 d-flex flex-column flex-grow-1">
+                  {u.category && <span className="umkm-kategori align-self-start mb-3">{u.category}</span>}
                   <h3 className="h5 fw-bold">{u.name}</h3>
-                  <span className="badge fw-normal" style={{ backgroundColor: "var(--pasir)", color: "var(--merah-tua)" }}>
-                    {u.category}
-                  </span>
-                  <p className="mt-2 mb-0" style={{ color: "var(--teks-redup)" }}>{u.description}</p>
+                  <p className="ringkasan-teks">{u.description}</p>
+                  <Link href="/umkm" className="tautan-aksi mt-auto">Lihat direktori usaha <span aria-hidden="true">→</span></Link>
                 </div>
-              </div>
+              </article>
             </div>
           ))}
         </div>
       </section>
 
       {/* Kontak */}
-      <section className="latar-budaya py-5">
+      <section className="latar-budaya kontak-beranda py-5">
         <div className="container py-2">
           <h2 className="h3 judul-seksi">Kontak</h2>
           <div className="row g-3">
@@ -172,6 +244,6 @@ export default async function Home() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

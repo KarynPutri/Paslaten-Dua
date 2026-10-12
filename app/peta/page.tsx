@@ -3,7 +3,7 @@ import PetaLokasi from "../../components/PetaLokasi";
 import { supabase } from "../../lib/supabase";
 import { LOKASI_PASLATEN_DUA as L, linkGoogleMaps, linkPetunjukArah } from "../../lib/lokasi";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export const metadata = {
   title: "Peta Lokasi | Kelurahan Paslaten Dua",

@@ -9,6 +9,7 @@ import {
   LayersControl,
   ScaleControl,
 } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 import { LOKASI_PASLATEN_DUA as L } from "../lib/lokasi";
 
 export default function PetaLeaflet({

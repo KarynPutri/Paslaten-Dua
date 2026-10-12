@@ -1,9 +1,13 @@
-import Link from "next/link";
 import PageHeader from "../../components/PageHeader";
+import BeritaClient from "../../components/BeritaClient";
 import { supabase } from "../../lib/supabase";
-import { tanggalIndo } from "../../lib/format";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
+
+export const metadata = {
+  title: "Berita & Kegiatan | Kelurahan Paslaten Dua",
+  description: "Kabar, pengumuman kegiatan, dan informasi terbaru seputar Kelurahan Paslaten Dua, Tomohon Timur",
+};
 
 export default async function Berita() {
   const { data: berita, error } = await supabase
@@ -15,30 +19,17 @@ export default async function Berita() {
     <>
       <PageHeader
         judul="Berita & Kegiatan"
-        deskripsi="Kabar dan kegiatan terbaru dari Kelurahan Paslaten Dua"
+        deskripsi="Kabar dan dokumentasi kegiatan terkini dari Kelurahan Paslaten Dua"
       />
       <div className="container py-5">
-        {error && <p className="text-danger">Gagal memuat data: {error.message}</p>}
-        {berita?.length === 0 && <p>Belum ada berita.</p>}
-        <div className="row g-4">
-          {berita?.map((b) => (
-            <div className="col-md-6 col-lg-4" key={b.id}>
-              <div className="kartu-lembut h-100 overflow-hidden">
-                {b.image_url ? (
-                  <img src={b.image_url} alt={b.title} style={{ width: "100%", height: "160px", objectFit: "cover" }} />
-                ) : (
-                  <div style={{ backgroundColor: "var(--pasir)", height: "160px" }} />
-                )}
-                <div className="p-3">
-                  <p className="small mb-1" style={{ color: "var(--teks-redup)" }}>{tanggalIndo(b.published_at)}</p>
-                  <h2 className="h5 fw-bold">{b.title}</h2>
-                  <p>{b.summary}</p>
-                  <Link href={`/berita/${b.id}`}>Baca Selengkapnya</Link>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        {error ? (
+          <div className="kartu-lembut p-4 text-center mx-auto" style={{ maxWidth: "600px" }}>
+            <p className="fw-semibold mb-1">Berita belum dapat dimuat</p>
+            <p className="small text-muted mb-0">Silakan muat ulang halaman.</p>
+          </div>
+        ) : (
+          <BeritaClient listBerita={berita ?? []} />
+        )}
       </div>
     </>
   );

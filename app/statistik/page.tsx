@@ -1,7 +1,8 @@
 import PageHeader from "../../components/PageHeader";
 import { supabase } from "../../lib/supabase";
+import { formatAngka as num } from "../../lib/format";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 type Kel = {
   id: number;
@@ -15,11 +16,6 @@ type Kel = {
   distance_city_km: number | null;
   data_year: number | null;
 };
-
-const num = (n: number | null | undefined, d = 0) =>
-  n === null || n === undefined || Number.isNaN(Number(n))
-    ? "-"
-    : Number(n).toLocaleString("id-ID", { minimumFractionDigits: d, maximumFractionDigits: d });
 
 function Batang({
   judul,

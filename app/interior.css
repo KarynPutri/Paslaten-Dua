@@ -1,0 +1,427 @@
+/* =========================================================
+   Gaya Halaman Dalam (Interior) Kelurahan Paslaten Dua
+   ========================================================= */
+
+/* Navigasi Sub-Bagian (Profil, etc.) */
+.nav-subhalaman {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.6rem;
+  background: var(--pasir);
+  border-radius: 999px;
+  border: 1px solid var(--garis);
+  margin-bottom: 2rem;
+  position: sticky;
+  top: 75px;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+
+.nav-subhalaman a {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--teks);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.nav-subhalaman a:hover,
+.nav-subhalaman a:focus-visible {
+  background: var(--emas-muda);
+  color: var(--hitam);
+}
+
+/* Kotak Pencarian */
+.kotak-cari {
+  position: relative;
+  max-width: 520px;
+  margin-bottom: 1.5rem;
+}
+
+.kotak-cari input {
+  width: 100%;
+  padding: 0.65rem 1rem 0.65rem 2.6rem;
+  border-radius: 12px;
+  border: 1.5px solid var(--garis);
+  background-color: #fff;
+  color: var(--teks);
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.kotak-cari input:focus {
+  outline: none;
+  border-color: var(--merah);
+  box-shadow: 0 0 0 3px rgba(155, 28, 28, 0.15);
+}
+
+.kotak-cari .ikon-cari {
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--teks-redup);
+  pointer-events: none;
+}
+
+/* Accordion Pelayanan */
+.item-layanan {
+  border: 1px solid var(--garis);
+  border-radius: 14px;
+  background: #fff;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.item-layanan:hover {
+  border-color: var(--emas-muda);
+}
+
+.header-layanan {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.25rem 1.5rem;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  gap: 1rem;
+}
+
+.header-layanan:focus-visible {
+  outline: 2px solid var(--merah);
+  outline-offset: -2px;
+}
+
+.header-layanan h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--teks);
+}
+
+.header-layanan .panah-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--pasir);
+  color: var(--merah);
+  font-size: 0.9rem;
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+
+.item-layanan.terbuka .header-layanan .panah-toggle {
+  transform: rotate(180deg);
+  background: var(--merah);
+  color: #fff;
+}
+
+.konten-layanan {
+  padding: 0 1.5rem 1.5rem;
+  border-top: 1px dashed var(--garis);
+}
+
+.daftar-cek {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.daftar-cek li {
+  position: relative;
+  padding-left: 1.6rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.daftar-cek li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--hijau);
+  font-weight: bold;
+}
+
+.alur-nomor {
+  padding-left: 1.2rem;
+  margin-bottom: 0;
+}
+
+.alur-nomor li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+/* Kolom Baca Nyaman */
+.kolom-baca {
+  max-width: 820px;
+  margin-inline: auto;
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.kolom-baca h2 {
+  margin-top: 2.5rem;
+}
+
+.kolom-baca p {
+  margin-bottom: 1.25rem;
+}
+
+/* Tabel Responsif Pendidikan & Sarana */
+.wadah-tabel-geser {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--garis);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.wadah-tabel-geser table {
+  margin-bottom: 0;
+  min-width: 580px;
+}
+
+/* Badge & Tag Filter */
+.tag-kategori-btn {
+  border: 1px solid var(--garis);
+  border-radius: 999px;
+  padding: 0.4rem 0.95rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: var(--pasir);
+  color: var(--teks);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tag-kategori-btn:hover {
+  background: var(--emas-muda);
+}
+
+.tag-kategori-btn.aktif {
+  background: var(--merah);
+  border-color: var(--merah);
+  color: #fff;
+}
+
+/* ---------- Kartu Fasilitas Publik (Referensi Desain) ---------- */
+.kartu-fasilitas-unggulan {
+  background: #ffffff;
+  border: 1px solid var(--garis);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.kartu-fasilitas-unggulan:hover {
+  transform: translateY(-4px);
+  border-color: var(--emas-muda);
+  box-shadow: 0 12px 28px rgba(110, 20, 20, 0.12);
+}
+
+.wadah-foto-fasilitas {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  background-color: var(--merah-tua);
+}
+
+.wadah-foto-fasilitas img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.kartu-fasilitas-unggulan:hover .wadah-foto-fasilitas img {
+  transform: scale(1.05);
+}
+
+.overlay-judul-fasilitas {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 3rem 1.25rem 1rem;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.45) 45%, rgba(0, 0, 0, 0.92) 100%);
+  color: #ffffff;
+  pointer-events: none;
+}
+
+.overlay-judul-fasilitas h3 {
+  font-family: var(--font-judul), serif;
+  font-size: 1.22rem;
+  font-weight: 700;
+  margin: 0;
+  color: #ffffff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+  line-height: 1.35;
+}
+
+.badge-ambang-atas {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.badge-kategori-putih {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--hitam);
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  backdrop-filter: blur(4px);
+}
+
+.badge-wilayah-gelap {
+  background: rgba(31, 21, 18, 0.88);
+  color: var(--emas-muda);
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(200, 150, 46, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(4px);
+}
+
+.badan-fasilitas {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background: #ffffff;
+}
+
+/* ---------- Tampilan Statistik Pendidikan Modern ---------- */
+.kartu-metrik-pendidikan {
+  background: #ffffff;
+  border: 1px solid var(--garis);
+  border-radius: 14px;
+  padding: 1.15rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kartu-metrik-pendidikan:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.label-metrik {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--teks-redup);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ikon-metrik {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+}
+
+.nilai-metrik {
+  font-size: 1.65rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--teks);
+  margin-bottom: 0.35rem;
+}
+
+.sub-metrik {
+  font-size: 0.8rem;
+}
+
+.kartu-jenjang-pendidikan {
+  background: #ffffff;
+  border: 1px solid var(--garis);
+  border-radius: 14px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.kartu-jenjang-pendidikan:hover {
+  transform: translateY(-3px);
+  border-color: rgba(200, 150, 46, 0.5);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+}
+
+.ikon-jenjang {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.ikon-tabel-jenjang {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.tabel-statistik-modern thead th {
+  background: var(--pasir);
+  color: var(--teks);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 0.85rem 1rem;
+  border-bottom: 2px solid rgba(200, 150, 46, 0.3);
+}
+
+.tabel-statistik-modern tbody td {
+  padding: 0.95rem 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.tabel-statistik-modern tbody tr:hover td {
+  background-color: rgba(245, 237, 224, 0.45);
+}
+
+.tabel-statistik-modern tfoot td {
+  background: var(--pasir);
+  color: var(--teks);
+  font-weight: 700;
+  padding: 1rem 1rem;
+  border-top: 2px solid rgba(200, 150, 46, 0.4);
+}
+

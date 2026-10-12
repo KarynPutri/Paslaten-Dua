@@ -4,7 +4,7 @@ import PageHeader from "../../../components/PageHeader";
 import { supabase } from "../../../lib/supabase";
 import { tanggalIndo } from "../../../lib/format";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function DetailBerita({
   params,
@@ -22,20 +22,56 @@ export default async function DetailBerita({
 
   return (
     <>
-      <PageHeader judul={item.title} deskripsi={tanggalIndo(item.published_at)} />
-      <div className="container py-5" style={{ maxWidth: "800px" }}>
-        {item.image_url ? (
-          <img
-            src={item.image_url}
-            alt={item.title}
-            className="mb-4"
-            style={{ width: "100%", maxHeight: "400px", objectFit: "cover", borderRadius: "16px" }}
-          />
-        ) : (
-          <div className="mb-4" style={{ backgroundColor: "var(--pasir)", height: "280px", borderRadius: "16px" }} />
-        )}
-        <p style={{ lineHeight: 1.8, whiteSpace: "pre-line" }}>{item.content}</p>
-        <Link href="/berita">← Kembali ke Berita</Link>
+      <PageHeader judul={item.title} deskripsi={`Diterbitkan pada ${tanggalIndo(item.published_at)}`} />
+      <div className="container py-5">
+        <div className="kolom-baca">
+          <nav className="mb-4" aria-label="Breadcrumb">
+            <Link href="/berita" className="fw-semibold d-inline-flex align-items-center gap-1 text-decoration-none" style={{ color: "var(--merah)" }}>
+              <span aria-hidden="true">←</span>
+              <span>Kembali ke Berita & Kegiatan</span>
+            </Link>
+          </nav>
+
+          <article className="kartu-lembut p-4 p-md-5 mb-5 shadow-sm">
+            {item.image_url ? (
+              <div className="overflow-hidden mb-4" style={{ borderRadius: "14px" }}>
+                <img
+                  src={item.image_url}
+                  alt={item.title}
+                  style={{ width: "100%", maxHeight: "460px", objectFit: "cover", display: "block" }}
+                />
+              </div>
+            ) : null}
+
+            <div className="d-flex align-items-center gap-2 mb-3 small" style={{ color: "var(--teks-redup)" }}>
+              <span className="badge" style={{ backgroundColor: "var(--pasir)", color: "var(--merah-tua)" }}>
+                Kabar Paslaten Dua
+              </span>
+              <span>•</span>
+              <time dateTime={item.published_at}>{tanggalIndo(item.published_at)}</time>
+            </div>
+
+            <h1 className="h3 fw-bold mb-4" style={{ lineHeight: 1.35 }}>
+              {item.title}
+            </h1>
+
+            {item.summary && (
+              <p className="lead fw-normal mb-4 p-3 border-start border-3" style={{ borderColor: "var(--emas)", backgroundColor: "var(--pasir)", color: "var(--teks)" }}>
+                {item.summary}
+              </p>
+            )}
+
+            <div className="konten-artikel" style={{ lineHeight: 1.85, whiteSpace: "pre-line", fontSize: "1.05rem" }}>
+              {item.content}
+            </div>
+          </article>
+
+          <div className="border-top pt-4 text-center">
+            <Link href="/berita" className="btn btn-outline-primary px-4">
+              ← Lihat Kabar Berita Lainnya
+            </Link>
+          </div>
+        </div>
       </div>
     </>
   );
