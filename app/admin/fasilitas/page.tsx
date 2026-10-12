@@ -21,18 +21,21 @@ export default function FasilitasAdmin() {
           options: [
             "Pemerintahan",
             "Pendidikan",
+            "Sarana Ibadah",
             "Kesehatan",
-            "Ibadah",
+            "Ruang Publik",
             "Perdagangan & Perbankan",
             "Akomodasi",
-            "Olahraga & Ruang Publik",
             "Lainnya",
           ],
         },
-        { name: "description", label: "Deskripsi", type: "textarea" },
         { name: "address", label: "Alamat / lokasi" },
-        { name: "maps_url", label: "Link Google Maps", help: "Buka lokasi di Google Maps, klik Bagikan, lalu Salin link." },
-        { name: "image_url", label: "Foto", type: "image", help: "Maksimal 5 MB." },
+        {
+          name: "maps_url",
+          label: "Link Google Maps",
+          help: "Buka lokasi di Google Maps, klik Bagikan, lalu Salin link. Dipakai untuk tombol Petunjuk Arah.",
+        },
+        { name: "image_url", label: "Foto", type: "image", help: "Maksimal 5 MB. Kosongkan jika belum ada foto." },
       ]}
     />
   );

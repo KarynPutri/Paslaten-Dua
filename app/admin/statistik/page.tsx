@@ -14,6 +14,9 @@ export default function StatistikAdmin() {
         { name: "female", label: "Perempuan" },
         { name: "area_km2", label: "Luas (km²)" },
         { name: "lingkungan", label: "Lingkungan" },
+        { name: "civil_servants", label: "PNS" },
+        { name: "distance_district_km", label: "Jarak Kec. (km)" },
+        { name: "distance_city_km", label: "Jarak Kota (km)" },
       ]}
       fields={[
         { name: "name", label: "Nama kelurahan", required: true, help: "Baris bernama persis \"Paslaten Dua\" dipakai sebagai data utama." },

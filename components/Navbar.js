@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { LogoMotif } from "./Ornamen";
+import LogoSitus from "./LogoSitus";
 
 const menuKelurahan = [
   {
@@ -157,7 +157,7 @@ export default function Navbar() {
       <nav className="navbar navbar-expand-lg navbar-light navbar-budaya py-2" aria-label="Navigasi Utama">
         <div className="container">
           <Link href="/" className="navbar-brand fw-bold" onClick={close}>
-            <LogoMotif ukuran={38} />
+            <LogoSitus ukuran={46} />
             <span>
               Paslaten Dua
               <span className="brand-sub">Tomohon Timur</span>
