@@ -5,6 +5,7 @@ import Peta3DLoader from "../components/Peta3DLoader";
 import InfoPaslaten from "../components/InfoPaslaten";
 import { supabase } from "../lib/supabase";
 import { tanggalIndo } from "../lib/format";
+import SambutanTeks from "../components/SambutanTeks";
 
 export const revalidate = 60;
 
@@ -176,21 +177,18 @@ export default async function Home() {
       <section className="container seksi-beranda" aria-labelledby="judul-sambutan">
         <div className="sambutan-panel">
           <div className="sambutan-foto">
-            <Foto src={profil?.lurah_photo_url} alt={profil?.lurah_name ? `Foto ${profil.lurah_name}` : "Foto Lurah"} tinggi={280} posisi="center 20%" contain />
+            <Foto
+              src={profil?.lurah_photo_url}
+              alt={profil?.lurah_name ? `Foto ${profil.lurah_name}` : "Foto Lurah"}
+              tinggi={280}
+              posisi="center 20%"
+            />
           </div>
           <div className="sambutan-teks">
             <div className="label-kecil mb-2">Dari Kantor Kelurahan</div>
             <h2 id="judul-sambutan" className="h3 judul-seksi">Sambutan Lurah</h2>
             {profil?.lurah_name && <p className="fw-semibold mb-2">{profil.lurah_name}</p>}
-            <p className="sambutan-ringkas" style={{ whiteSpace: "pre-line" }}>
-              {sambutanPanjang ? `${sambutan.slice(0, 220).trimEnd()}…` : sambutan}
-            </p>
-            {sambutanPanjang && (
-              <details className="sambutan-lengkap">
-                <summary className="tautan-aksi">Baca sambutan lengkap</summary>
-                <p className="mt-3 mb-0" style={{ whiteSpace: "pre-line" }}>{sambutan}</p>
-              </details>
-            )}
+            <SambutanTeks teks={sambutan} />
           </div>
         </div>
       </section>
@@ -233,10 +231,16 @@ export default async function Home() {
               <div className="label-kecil">Alamat</div>
               {profil?.office_address || "-"}
             </div>
-            <div className="col-md-4">
-              <div className="label-kecil">Telepon</div>
-              {profil?.phone || "-"}
-            </div>
+              <div className="col-md-4">
+                <div className="label-kecil">Email</div>
+                {profil?.email ? (
+                  <a href={`mailto:${profil.email}`} style={{ color: "inherit", overflowWrap: "anywhere" }}>
+                    {profil.email}
+                  </a>
+                ) : (
+                  "-"
+                )}
+              </div>
             <div className="col-md-4">
               <div className="label-kecil">Jam Pelayanan</div>
               {profil?.office_hours || "-"}

@@ -5,7 +5,7 @@ import LogoSitus from "./LogoSitus";
 
 const tautanKiri = [
   { href: "/profil", label: "Profil" },
-  { href: "/pemerintahan", label: "Pemerintahan" },
+  { href: "/sejarah", label: "Sejarah" },
   { href: "/pelayanan", label: "Pelayanan" },
   { href: "/umkm", label: "UMKM" },
   { href: "/peta", label: "Peta Lokasi" },

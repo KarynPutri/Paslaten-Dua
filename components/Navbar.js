@@ -9,7 +9,7 @@ const menuKelurahan = [
   {
     href: "/profil",
     label: "Profil & Wilayah",
-    sub: "Sejarah, visi misi & potensi lokal",
+    sub: "Visi misi, wilayah & struktur pemerintahan",
     ikon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M15 10v11M12 3l9 7H3z" />
@@ -17,15 +17,12 @@ const menuKelurahan = [
     ),
   },
   {
-    href: "/pemerintahan",
-    label: "Struktur Pemerintahan",
-    sub: "Lurah, perangkat & aparatur kantor",
+    href: "/sejarah",
+    label: "Sejarah",
+    sub: "Asal-usul, asal nama & perkembangan wilayah",
     ikon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        <path d="M5 4h11a3 3 0 013 3v13H8a3 3 0 01-3-3V4zM5 17a3 3 0 013-3h11" />
       </svg>
     ),
   },

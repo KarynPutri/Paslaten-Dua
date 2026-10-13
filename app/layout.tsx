@@ -4,6 +4,7 @@ import "./interior.css";
 import { Lora, Plus_Jakarta_Sans } from "next/font/google";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import AnimasiScroll from "../components/AnimasiScroll";
 
 const fontJudul = Lora({
   subsets: ["latin"],
@@ -35,9 +36,10 @@ export default function RootLayout({
           Lompat ke konten utama
         </a>
         <Navbar />
-        <main id="konten-utama" className="flex-grow-1" tabIndex={-1}>
-          {children}
-        </main>
+        <AnimasiScroll />
+          <main id="konten-utama" className="flex-grow-1" tabIndex={-1}>
+            {children}
+          </main>
         <Footer />
       </body>
     </html>
